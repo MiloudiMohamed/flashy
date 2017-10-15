@@ -15,7 +15,7 @@
     export default {
         props: {
             dataTitle: {
-                default: 'arr'
+                default: ''
             },
             dataMessage: {
                 default: ''
