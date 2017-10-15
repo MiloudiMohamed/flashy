@@ -1,0 +1,31 @@
+{
+    "name": "devmi/flashy",
+    "description": "VueJs alert component for laravel.",
+    "keywords": ["laravel", "vue", "alert"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Miloudi",
+            "email": "milou0104@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Devmi\\Flashy\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "require": {
+        "php": ">=5.6.0",
+        "illuminate/support": ">=5.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Devmi\\Flashy\\FlashyServiceProvider"
+            ]
+        }
+    }
+}
