@@ -63,6 +63,7 @@ You may also change the default theme color, display delay, add title, stop anim
     data-message="{{ flashy()->message() }}"
     data-type="{{ flashy()->type() }}"
     data-delay="3000"
+    data-template="bootstrap"
     :data-animated="true">
 </flashy>
 ```
@@ -79,6 +80,8 @@ flashy()->push('This message will be flashed.', 'Title', 'Info');
 
 
 >**Delay:** `Integer` (optional) | **Default:** `3000`
+
+>**Template:** `String` eg: `['bootstrap', 'bulma']` (optional) | **Default:** `bootstrap`
 
 >**Animated:** `Boolean` (optional) | **Default:** `true`
 

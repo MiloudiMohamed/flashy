@@ -1,7 +1,7 @@
 <template>
     <transition :name="animation">
         <div v-if="show"
-            class="flashy alert"
+            class="flashy"
             :class="alertType"
             role="alert"
         >
@@ -14,12 +14,8 @@
 <script>
     export default {
         props: {
-            dataTitle: {
-                default: 'arr'
-            },
-            dataMessage: {
-                default: ''
-            },
+            dataTitle: {},
+            dataMessage: {},
             dataDelay: {
                 default: 3000
             },
@@ -29,6 +25,9 @@
             dataAnimated: {
                 type: Boolean,
                 default: true
+            },
+            dataTemplate: {
+                default: 'bootstrap'
             }
         },
         data () {
@@ -36,17 +35,21 @@
                 body: this.dataMessage,
                 title: this.dataTitle,
                 delay: this.dataDelay,
-                type: 'success',
+                type: this.dataType,
                 animated: this.dataAnimated,
-                show: false
+                show: false,
+                template: this.dataTemplate
             }
         },
         computed: {
             alertType () {
-                return 'alert-' + this.type
+                return this.getTamplate + this.type
             },
             animation () {
                 return this.animated ? 'slide-fade' : ''
+            },
+            getTamplate () {
+                return this.template === 'bootstrap' ? 'alert alert-' : 'notification is-'
             }
         },
 
