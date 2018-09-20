@@ -18,8 +18,14 @@
                 default: 'success'
             },
 
-            title: {},
-            message: {},
+            title: {
+                type: String
+            },
+
+            message: {
+                type: String
+            },
+
             delay: { default: 3000 },
 
             animated: {
@@ -45,6 +51,7 @@
                 },
             }
         },
+
         computed: {
             animation () {
                 return this.animated ? 'slide-fade' : ''
