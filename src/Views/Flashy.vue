@@ -1,7 +1,7 @@
 <template>
     <transition :name="animation">
         <div v-if="show"
-            class="absolute pin-b pin-r mr-8 mb-6 py-3 px-4 rounded-md shadow text-white"
+            class="fixed pin-b pin-r mr-8 mb-6 py-3 px-4 rounded-md shadow text-white"
             :class="[types[dataType]]"
         >
             <strong>{{ dataTitle }}</strong> {{ dataMessage }}
