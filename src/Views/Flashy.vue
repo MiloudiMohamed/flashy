@@ -1,12 +1,10 @@
 <template>
     <transition :name="animation">
         <div v-if="show"
-            class="flashy"
-            :class="alertType"
-            role="alert"
+            class="absolute pin-b pin-l ml-8 mb-6 py-3 px-4 rounded-md shadow"
+            :class="[types[dataType]]"
         >
-        <strong v-if="title">{{ title }} </strong>
-          {{ body }}
+            <strong>{{ dataTitle }}</strong> {{ dataMessage }}
         </div>
     </transition>
 </template>
@@ -14,57 +12,57 @@
 <script>
     export default {
         props: {
-            dataTitle: {},
-            dataMessage: {},
-            dataDelay: {
-                default: 3000
-            },
-            dataType: {
+            type: {
+                require: false,
+                type: String,
                 default: 'success'
             },
-            dataAnimated: {
+
+            title: {},
+            message: {},
+            delay: { default: 3000 },
+
+            animated: {
                 type: Boolean,
                 default: true
             },
-            dataTemplate: {
-                default: 'bootstrap'
-            }
         },
         data () {
             return {
-                body: this.dataMessage,
-                title: this.dataTitle,
-                delay: this.dataDelay,
-                type: this.dataType,
-                animated: this.dataAnimated,
                 show: false,
-                template: this.dataTemplate
+                dataTitle: this.title,
+                dataMessage: this.message,
+                dataType: this.type,
+
+                types: {
+                    primary: 'bg-blue text-white',
+                    success: 'bg-green text-white',
+                    danger: 'bg-red text-white',
+                    warning: 'bg-orange text-white',
+                    secondary: 'bg-grey-darker text-white',
+                    black: 'bg-black text-white',
+                    light: 'bg-white text-black border',
+                },
             }
         },
         computed: {
-            alertType () {
-                return this.getTamplate + this.type
-            },
             animation () {
                 return this.animated ? 'slide-fade' : ''
-            },
-            getTamplate () {
-                return this.template === 'bootstrap' ? 'alert alert-' : 'notification is-'
             }
         },
 
-        created() {
-            if (this.body) {
-                this.flash(this.body, this.title, this.type)
+        mounted() {
+            if (this.dataMessage) {
+                this.flash(this.dataMessage, this.dataType, this.dataTitle)
             }
-            window.events.$on('flashy', (message, title, type) => this.flash(message, title, type))
+            window.events.$on('flashy', (message, type, title) => this.flash(message, type, title))
         },
 
         methods: {
-            flash(message, title = '', type = 'success') {
-                this.body = message
-                this.title = title
-                this.type = type
+            flash(message, type='success', title) {
+                this.dataMessage = message
+                this.dataType = type
+                this.dataTitle = title
                 this.show = true
                 this.hide()
             },
@@ -72,7 +70,14 @@
             hide () {
                 setTimeout(() => {
                     this.show = false
+                    this.clearFlash()
                 }, this.delay)
+            },
+
+            clearFlash () {
+                this.dataMessage = null
+                this.dataTitle = null
+                this.dataType = null
             }
         }
 
@@ -80,12 +85,6 @@
 </script>
 
 <style scoped>
-    .flashy {
-        position: fixed;
-        bottom: 1em;
-        right: 2em;
-    }
-
     .slide-fade-enter-active {
       transition: all .3s ease;
     }

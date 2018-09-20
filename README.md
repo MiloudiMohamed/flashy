@@ -59,29 +59,26 @@ You may also change the default theme color, display delay, add title, stop anim
 `app.blade.php`
 ```
 <flashy
-    data-title="{{ flashy()->title() }}"
-    data-message="{{ flashy()->message() }}"
-    data-type="{{ flashy()->type() }}"
-    data-delay="3000"
-    data-template="bootstrap"
-    :data-animated="true">
+    title="{{ flashy()->title() }}"
+    message="{{ flashy()->message() }}"
+    type="{{ flashy()->type() }}"
+    delay="3000"
+    animated="true"
+>
 </flashy>
 ```
 And
 ```
-flashy()->push('This message will be flashed.', 'Title', 'Info');
+flashy()->push(message, type, title);
 ```
 
 >**Title:** `String` (optional)
 
 >**Message:** `String`
 
->**Type:**  `string` eg: `['success', 'info', 'danger', 'warning', 'primary', 'secondary', 'light', 'dark']` (optional)  | **Default:** `success`
-
+>**Type:**  `string` eg: `['primary', 'success', 'danger', 'warning', 'secondary', 'black', 'light']` (optional)  | **Default:** `success`
 
 >**Delay:** `Integer` (optional) | **Default:** `3000`
-
->**Template:** `String` eg: `['bootstrap', 'bulma']` (optional) | **Default:** `bootstrap`
 
 >**Animated:** `Boolean` (optional) | **Default:** `true`
 
@@ -90,7 +87,7 @@ If you use Ajax requests, you should add to `resources/assets/js/app.js` the fol
 
 ```
 window.events = new Vue();
-window.flashy = (message, title, type) => window.events.$emit('flashy', message, title, type)
+window.flashy = (message, type, title) => window.events.$emit('flashy', message, type, title)
 ```
 then simply you can call `flashy()` global function from any `.vue` file and pass you arguments.
 

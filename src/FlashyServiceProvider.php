@@ -18,7 +18,7 @@ class FlashyServiceProvider extends ServiceProvider
             __DIR__.'/config/flashy.php' => config_path('flashy.php'),
         ]);
         $this->publishes([
-            __DIR__ . '/Views' => resource_path('assets/js/vendor/devmi')
+            __DIR__ . '/Views' => resource_path('js/vendor/devmi')
         ], 'devmi');
     }
 
@@ -29,7 +29,7 @@ class FlashyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('flashy', function () {
+        $this->app->singleton('flashy', function ($app) {
             return $this->app->make('Devmi\Flashy\Flashy');
         });
     }

@@ -14,7 +14,7 @@ class Flashy
         $this->session = $session;
     }
 
-    public function push($message, $title = null, $type = 'success')
+    public function push($message, $type = 'success',  $title = null)
     {
         $this->session->push([
             'flashy.message' => $message,
