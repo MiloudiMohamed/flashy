@@ -6,6 +6,7 @@ Beautiful alert component made with VueJs for Laravel app.
 
 ## Installation
 
+
 ### Step 1: Composer
 From the command line, run:
 
